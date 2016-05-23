@@ -1,0 +1,1365 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/15/2016 7:54:29 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SUNKANG"
+  DTS:CreatorName="SUNKANG\sunkang"
+  DTS:DTSID="{0FF84E02-6BC2-4B92-A446-EBDCA976EAAA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="2052"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{D238D01B-854F-4DF9-9BDB-892F4E0986F4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{814C3255-460F-462C-A97F-81F125DF4218}"
+      DTS:ObjectName="LocalHost.DWWeatherTracker">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DWWeatherTracker;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[WeatherHistory.txt]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F6834363-FE7A-40AC-B475-5FA68D146C3F}"
+      DTS:ObjectName="WeatherHistory.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2052"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="936"
+          DTS:ConnectionString="D:\workspace\mysrc\dotnet\ProjectSSIS\WeatherHistory.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Date"
+              DTS:DTSID="{262B1705-FB83-4E2F-A604-75645A6FAC60}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Max TemperatureF"
+              DTS:DTSID="{0E3112C3-73C2-4A94-87E7-7AF5B43660FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Min TemperatureF"
+              DTS:DTSID="{7FD8D193-09C0-4E47-B019-7FC193412888}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Events"
+              DTS:DTSID="{70DF3C58-CC79-4717-9B34-688F6874522D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="数据流任务"
+      DTS:DTSID="{E94B90D6-673B-451A-BE0B-0A504E4E4E8F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="将文本文件内的数据加载到WeatherHistoryStaging表中"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB 目标;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;4"
+              description="OLE DB 目标"
+              name="OLE DB 目标"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="命令超时前等待的时间(秒)。值为 0，表示无限期等待。"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="指定用于打开行集的数据库对象的名称。"
+                  name="OpenRowset">[dbo].[WeatherHistoryStaging]</property>
+                <property
+                  dataType="System.String"
+                  description="指定包含用于打开行集的数据库对象名的变量。"
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="要执行的 SQL 命令。"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="指定当数据源中没有代码页信息时使用的列代码页。"
+                  name="DefaultCodePage">936</property>
+                <property
+                  dataType="System.Boolean"
+                  description="描述字符数据时，强制使用 DefaultCodePage 属性值。"
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定用于访问数据库的模式。"
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示是否将为标识列提供的值复制到目标。如果设置为 False，则将在目标中为标识列自动生成值。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示对于包含 Null 值的列是否将 Null 值插入目标中。如果为 False，则对于包含 Null 值的列会将其默认值插入目标中。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="指定将用于快速加载的选项。仅当启用了快速加载时适用。"
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定在插入数据期间何时发出提交命令。如果值为 0，则指定在数据插入结束时发出一个提交命令。仅当启用了快速加载时适用。"
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  description="指定用于访问数据库的 OLE DB 运行时连接。"
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入]"
+                  errorOrTruncationOperation="插入"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB 目标输入">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Date]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Date"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Date]"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Max TemperatureF]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Max TemperatureF"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Max TemperatureF]"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Max TemperatureF]" />
+                    <inputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Min TemperatureF]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Min TemperatureF"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Min TemperatureF]"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Min TemperatureF]" />
+                    <inputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Events]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Events"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Events]"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Events]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Date]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Max TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Min TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Events" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Outputs[OLE DB 目标错误输出]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB 目标错误输出"
+                  synchronousInputId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="平面文件源;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;1"
+              description="平面文件源"
+              localeId="2052"
+              name="平面文件源"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="指定是否将长度为 0 的列视为 Null。"
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="指定包含该文件名的输出列的名称。如果未指定名称，则不会生成包含该文件名的输出列。"
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[WeatherHistory.txt]"
+                  connectionManagerRefId="Package.ConnectionManagers[WeatherHistory.txt]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出]"
+                  name="平面文件源输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Date]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Date]"
+                      length="50"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示该列是否使用更快、不分区域设置的分析例程。"
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示数据是否为二进制格式。"
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Max TemperatureF]"
+                      length="50"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Max TemperatureF]"
+                      name="Max TemperatureF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示该列是否使用更快、不分区域设置的分析例程。"
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示数据是否为二进制格式。"
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Min TemperatureF]"
+                      length="50"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Min TemperatureF]"
+                      name="Min TemperatureF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示该列是否使用更快、不分区域设置的分析例程。"
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示数据是否为二进制格式。"
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Events]"
+                      length="50"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].Columns[Events]"
+                      name="Events"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示该列是否使用更快、不分区域设置的分析例程。"
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="指示数据是否为二进制格式。"
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Date]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Max TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Min TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出].ExternalColumns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Events" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出]"
+                  isErrorOut="true"
+                  name="平面文件源错误输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[平面文件源错误输出列]"
+                      codePage="936"
+                      dataType="text"
+                      description="平面文件源错误输出列"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[平面文件源错误输出列]"
+                      name="平面文件源错误输出列" />
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中.Paths[平面文件源输出]"
+              endId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标.Inputs[OLE DB 目标输入]"
+              name="平面文件源输出"
+              startId="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源.Outputs[平面文件源输出]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="数据流任务"
+      DTS:DTSID="{47C8DCF8-5F91-470D-970C-42BAFA30BED1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="根据WeatherHistoryStaging表和维度表数据生成事实表数据"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB 源;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;7"
+              description="OLE DB 源"
+              name="OLE DB 源"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="命令超时前等待的时间(秒)。值为 0，表示无限期等待。"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="指定用于打开行集的数据库对象的名称。"
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="指定包含用于打开行集的数据库对象名的变量。"
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="要执行的 SQL 命令。"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT   CONVERT(datetime, WHS.[Date]) AS [Date], WHS.[Max TemperatureF], WHS.[Min TemperatureF], DE.EventKey
+FROM      WeatherHistoryStaging AS WHS INNER JOIN
+                DimEvents AS DE ON WHS.Events = DE.EventName</property>
+                <property
+                  dataType="System.String"
+                  description="包含要执行的 SQL 命令的变量。"
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="指定当数据源中没有代码页信息时使用的列代码页。"
+                  name="DefaultCodePage">936</property>
+                <property
+                  dataType="System.Boolean"
+                  description="描述字符数据时，强制使用 DefaultCodePage 属性值。"
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定用于访问数据库的模式。"
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="SQL 命令中的参数与变量之间的映射。"
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  description="指定用于访问数据库的 OLE DB 运行时连接。"
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出]"
+                  name="OLE DB 源输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Date]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Max TemperatureF]"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Max TemperatureF]"
+                      name="Max TemperatureF"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Min TemperatureF]"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Min TemperatureF]"
+                      name="Min TemperatureF"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[EventKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[EventKey]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[EventKey]"
+                      name="EventKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Date]"
+                      dataType="dbTimeStamp"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Max TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Min TemperatureF" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[EventKey]"
+                      dataType="i4"
+                      name="EventKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出]"
+                  isErrorOut="true"
+                  name="OLE DB 源错误输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Date]"
+                      name="Date" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Max TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Max TemperatureF]"
+                      name="Max TemperatureF" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Min TemperatureF]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Min TemperatureF]"
+                      name="Min TemperatureF" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[EventKey]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[EventKey]"
+                      name="EventKey" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB 目标;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;4"
+              description="OLE DB 目标"
+              name="OLE DB 目标"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="命令超时前等待的时间(秒)。值为 0，表示无限期等待。"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="指定用于打开行集的数据库对象的名称。"
+                  name="OpenRowset">[dbo].[FactWeather]</property>
+                <property
+                  dataType="System.String"
+                  description="指定包含用于打开行集的数据库对象名的变量。"
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="要执行的 SQL 命令。"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="指定当数据源中没有代码页信息时使用的列代码页。"
+                  name="DefaultCodePage">936</property>
+                <property
+                  dataType="System.Boolean"
+                  description="描述字符数据时，强制使用 DefaultCodePage 属性值。"
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定用于访问数据库的模式。"
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示是否将为标识列提供的值复制到目标。如果设置为 False，则将在目标中为标识列自动生成值。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示对于包含 Null 值的列是否将 Null 值插入目标中。如果为 False，则对于包含 Null 值的列会将其默认值插入目标中。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="指定将用于快速加载的选项。仅当启用了快速加载时适用。"
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定在插入数据期间何时发出提交命令。如果值为 0，则指定在数据插入结束时发出一个提交命令。仅当启用了快速加载时适用。"
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  description="指定用于访问数据库的 OLE DB 运行时连接。"
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入]"
+                  errorOrTruncationOperation="插入"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB 目标输入">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Date"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Date]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[EventKey]"
+                      cachedDataType="i4"
+                      cachedName="EventKey"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[EventKey]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[EventKey]" />
+                    <inputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Max TemperatureF]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Max TemperatureF"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[MaxTempF]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Max TemperatureF]" />
+                    <inputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Min TemperatureF]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Min TemperatureF"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[MinTempF]"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Min TemperatureF]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[Date]"
+                      dataType="dbTimeStamp"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[EventKey]"
+                      dataType="i4"
+                      name="EventKey" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[MaxTempF]"
+                      dataType="i4"
+                      name="MaxTempF" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[MinTempF]"
+                      dataType="i4"
+                      name="MinTempF" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB 目标错误输出"
+                  synchronousInputId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据.Paths[OLE DB 源输出]"
+              endId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标.Inputs[OLE DB 目标输入]"
+              name="OLE DB 源输出"
+              startId="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源.Outputs[OLE DB 源输出]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\根据WeatherHistoryStaging表生成维度表数据"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="数据流任务"
+      DTS:DTSID="{47FD3307-03BA-4A54-ADB7-88D5B19A48D4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="根据WeatherHistoryStaging表生成维度表数据"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB 源;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;7"
+              description="OLE DB 源"
+              name="OLE DB 源"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="命令超时前等待的时间(秒)。值为 0，表示无限期等待。"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="指定用于打开行集的数据库对象的名称。"
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="指定包含用于打开行集的数据库对象名的变量。"
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="要执行的 SQL 命令。"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT Events
+FROM      WeatherHistoryStaging</property>
+                <property
+                  dataType="System.String"
+                  description="包含要执行的 SQL 命令的变量。"
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="指定当数据源中没有代码页信息时使用的列代码页。"
+                  name="DefaultCodePage">936</property>
+                <property
+                  dataType="System.Boolean"
+                  description="描述字符数据时，强制使用 DefaultCodePage 属性值。"
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定用于访问数据库的模式。"
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="SQL 命令中的参数与变量之间的映射。"
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  description="指定用于访问数据库的 OLE DB 运行时连接。"
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出]"
+                  name="OLE DB 源输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      errorOrTruncationOperation="转换"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Events]"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Events]"
+                      name="Events"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出].ExternalColumns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="Events" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出]"
+                  isErrorOut="true"
+                  name="OLE DB 源错误输出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Events]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[Events]"
+                      name="Events" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB 目标;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; 保留所有权利; http://www.microsoft.com/sql/support;4"
+              description="OLE DB 目标"
+              name="OLE DB 目标"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="命令超时前等待的时间(秒)。值为 0，表示无限期等待。"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="指定用于打开行集的数据库对象的名称。"
+                  name="OpenRowset">[dbo].[DimEvents]</property>
+                <property
+                  dataType="System.String"
+                  description="指定包含用于打开行集的数据库对象名的变量。"
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="要执行的 SQL 命令。"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="指定当数据源中没有代码页信息时使用的列代码页。"
+                  name="DefaultCodePage">936</property>
+                <property
+                  dataType="System.Boolean"
+                  description="描述字符数据时，强制使用 DefaultCodePage 属性值。"
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定用于访问数据库的模式。"
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示是否将为标识列提供的值复制到目标。如果设置为 False，则将在目标中为标识列自动生成值。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="指示对于包含 Null 值的列是否将 Null 值插入目标中。如果为 False，则对于包含 Null 值的列会将其默认值插入目标中。仅当启用了快速加载时适用。"
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="指定将用于快速加载的选项。仅当启用了快速加载时适用。"
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="指定在插入数据期间何时发出提交命令。如果值为 0，则指定在数据插入结束时发出一个提交命令。仅当启用了快速加载时适用。"
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DWWeatherTracker]"
+                  description="指定用于访问数据库的 OLE DB 运行时连接。"
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入]"
+                  errorOrTruncationOperation="插入"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB 目标输入">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入].Columns[Events]"
+                      cachedCodepage="936"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Events"
+                      externalMetadataColumnId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[EventName]"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出].Columns[Events]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[EventKey]"
+                      dataType="i4"
+                      name="EventKey" />
+                    <externalMetadataColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入].ExternalColumns[EventName]"
+                      codePage="936"
+                      dataType="str"
+                      length="50"
+                      name="EventName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB 目标错误输出"
+                  synchronousInputId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Outputs[OLE DB 目标错误输出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\根据WeatherHistoryStaging表生成维度表数据.Paths[OLE DB 源输出]"
+              endId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标.Inputs[OLE DB 目标输入]"
+              name="OLE DB 源输出"
+              startId="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源.Outputs[OLE DB 源输出]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\清理数据仓库中的旧数据"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="执行 SQL 任务"
+      DTS:DTSID="{BA32094C-C983-41E3-8EBF-7562E303530D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="清理数据仓库中的旧数据"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{814C3255-460F-462C-A97F-81F125DF4218}"
+          SQLTask:SqlStatementSource="DELETE FROM [dbo].[WeatherHistoryStaging]&#xA;DELETE FROM [dbo].[FactWeather]&#xA;DELETE FROM [dbo].[DimEvents]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[约束]"
+      DTS:CreationName=""
+      DTS:DTSID="{8CCF6D05-C54E-434B-B17C-49027706590E}"
+      DTS:From="Package\清理数据仓库中的旧数据"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="约束"
+      DTS:To="Package\将文本文件内的数据加载到WeatherHistoryStaging表中" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[约束 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{23F6E337-A64C-4AD7-8CB1-6FAC7E11C5F2}"
+      DTS:From="Package\将文本文件内的数据加载到WeatherHistoryStaging表中"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="约束 1"
+      DTS:To="Package\根据WeatherHistoryStaging表生成维度表数据" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[约束 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{B878E3CE-4327-4651-A5E2-7C462D4CF838}"
+      DTS:From="Package\根据WeatherHistoryStaging表生成维度表数据"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="约束 2"
+      DTS:To="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--此 CDATA 部分包含包的布局信息。该部分包括(x,y)坐标、宽度和高度之类的信息。-->
+<!--如果您手动编辑此部分并且出错，则可以删除此部分。 -->
+<!--该包仍将能够正常加载，但以前的布局信息将丢失，并且设计器将自动在设计图面上重新排列这些元素。-->
+<Objects
+  Version="sql12">
+  <!--下面的每个节点都将包含不会影响运行时行为的属性。-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="397,42"
+          Id="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据"
+          TopLeft="52.4999979138375,441.999977418356" />
+        <NodeLayout
+          Size="325,42"
+          Id="Package\根据WeatherHistoryStaging表生成维度表数据"
+          TopLeft="90.8333297239411,309.214269916623" />
+        <NodeLayout
+          Size="373,42"
+          Id="Package\将文本文件内的数据加载到WeatherHistoryStaging表中"
+          TopLeft="65.8333307173517,186.642847607331" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\清理数据仓库中的旧数据"
+          TopLeft="147.499994138877,48.285711818812" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[约束]"
+          TopLeft="252.666662428114,90.285711818812">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.3571357885189"
+              Start="0,0"
+              End="0,88.8571357885189">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,88.8571357885189" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[约束 1]"
+          TopLeft="252.833330220646,228.642847607331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.5714223092918"
+              Start="0,0"
+              End="0,73.0714223092918">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.0714223092918" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[约束 2]"
+          TopLeft="252.166663818889,351.214269916623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90.785707501733"
+              Start="0,0"
+              End="0,83.285707501733">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.285707501733" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="133,42"
+          Id="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源"
+          TopLeft="17.4999993046125,39.928569388633" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标"
+          TopLeft="228.333324260182,45.499997675419" />
+        <EdgeLayout
+          Id="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据.Paths[OLE DB 源输出]"
+          TopLeft="150.499999304613,63.714283532026">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77.8333249555697,0"
+              Start="0,0"
+              End="70.3333249555697,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.3333249555697,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\根据WeatherHistoryStaging表生成维度表数据">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145,42"
+          Id="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标"
+          TopLeft="352,43" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源"
+          TopLeft="50,45" />
+        <EdgeLayout
+          Id="Package\根据WeatherHistoryStaging表生成维度表数据.Paths[OLE DB 源输出]"
+          TopLeft="183,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="169,0"
+              Start="0,0"
+              End="161.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="161.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 源">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\根据WeatherHistoryStaging表生成维度表数据\OLE DB 目标">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\将文本文件内的数据加载到WeatherHistoryStaging表中">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="139,42"
+          Id="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\平面文件源"
+          TopLeft="144.166660937998,174.571419652628" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标"
+          TopLeft="422.499983211359,180.142847939414" />
+        <EdgeLayout
+          Id="Package\将文本文件内的数据加载到WeatherHistoryStaging表中.Paths[平面文件源输出]"
+          TopLeft="283.166660937998,198.357133796021">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="139.333322273361,0"
+              Start="0,0"
+              End="131.833322273361,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="131.833322273361,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\将文本文件内的数据加载到WeatherHistoryStaging表中\OLE DB 目标">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 源">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\根据WeatherHistoryStaging表和维度表数据生成事实表数据\OLE DB 目标">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

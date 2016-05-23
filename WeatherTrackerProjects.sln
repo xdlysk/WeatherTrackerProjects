@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "WeatherTrackerETL", "WeatherTrackerETL\WeatherTrackerETL.dtproj", "{6E719C7B-214A-44CA-81C9-D2DB08255CE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{7DE26545-59D5-4134-BE90-151FBF4692DB}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\test.sql = Scripts\test.sql
+		Scripts\WeatherHistory.txt = Scripts\WeatherHistory.txt
+	EndProjectSection
+EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "WeatherTrackerCubes", "WeatherTrackerCubes\WeatherTrackerCubes.dwproj", "{799ECA53-4B14-48AA-8BC1-504D632E8BEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E719C7B-214A-44CA-81C9-D2DB08255CE3}.Development|Default.ActiveCfg = Development
+		{6E719C7B-214A-44CA-81C9-D2DB08255CE3}.Development|Default.Build.0 = Development
+		{799ECA53-4B14-48AA-8BC1-504D632E8BEB}.Development|Default.ActiveCfg = Development
+		{799ECA53-4B14-48AA-8BC1-504D632E8BEB}.Development|Default.Build.0 = Development
+		{799ECA53-4B14-48AA-8BC1-504D632E8BEB}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
