@@ -15,6 +15,11 @@ Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "WeatherTrackerCubes", "Weat
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "WeatherTrackerReports", "WeatherTrackerReports\WeatherTrackerReports.rptproj", "{A26D3363-0485-4EC8-903E-1FBC8EAAE61E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EA8BDDE-A8AF-4FAB-A868-79595000E324}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
