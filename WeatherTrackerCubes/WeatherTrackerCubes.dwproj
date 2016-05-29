@@ -58,6 +58,7 @@
             <Value xsi:type="xsd:int">0</Value>
           </ConfigurationSetting>
         </ConnectionSecurityMappings>
+        <RemovePasswords>false</RemovePasswords>
       </Options>
     </Configuration>
   </Configurations>

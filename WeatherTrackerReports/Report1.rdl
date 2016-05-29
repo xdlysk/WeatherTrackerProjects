@@ -548,8 +548,8 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>DataSource1</DataSourceReference>
+    <DataSource Name="WeatherTrackerDataSource">
+      <DataSourceReference>WeatherTrackerDataSource</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>02a66d4f-62c7-47b4-bdf4-e968c407912c</rd:DataSourceID>
     </DataSource>
@@ -557,7 +557,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>WeatherTrackerDataSource</DataSourceName>
         <CommandText>SELECT NON EMPTY { [Measures].[Max Temp F], [Measures].[Min Temp F] } ON COLUMNS, NON EMPTY { ([DimDate].[Date].[Date].ALLMEMBERS * [DimEvents].[Event].[Event].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [DWWeatherTracker] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS</CommandText>
         <rd:DesignerState>
           <QueryDefinition xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
